@@ -10,14 +10,14 @@ app.post('/api/chatbot', (req, res) => {
   const { command } = req.body;
   if (!command) return res.status(400).json({ error: "Missing command." });
 
-  let response = {};
+  let response;
 
   if (command.includes('generate')) {
     response = {
       type: "work_plan",
-      mobePlan: ["Mobilize", "Safety Briefing"],
-      holdPoints: ["Permit Review", "Equipment Check"],
-      demobePlan: ["Site Clean-up", "Signoff"]
+      mobePlan: ["Mobilize crew", "Load equipment", "Pre-check"],
+      holdPoints: ["Permit signoff", "Vac check"],
+      demobePlan: ["Clean site", "Packout"]
     };
   } else if (command.includes('predict')) {
     response = {
@@ -28,10 +28,9 @@ app.post('/api/chatbot', (req, res) => {
     };
   } else if (command.includes('revise')) {
     response = {
-      type: "sop_revision",
       sop: "Confined Space Entry",
       updatedBy: "AI",
-      status: "Draft revision generated"
+      status: "Draft revision logged"
     };
   } else {
     response = { message: "Unknown command." };
@@ -41,6 +40,4 @@ app.post('/api/chatbot', (req, res) => {
 });
 
 const port = process.env.PORT || 5000;
-app.listen(port, () => {
-  console.log(`✅ Backend running on port ${port}`);
-});
+app.listen(port, () => console.log(`✅ Backend running on port ${port}`));
