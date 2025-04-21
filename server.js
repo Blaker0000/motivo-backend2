@@ -15,22 +15,9 @@ app.post('/api/chatbot', (req, res) => {
   if (command.includes('generate')) {
     response = {
       type: "work_plan",
-      mobePlan: ["Mobilize crew", "Load equipment", "Pre-check"],
-      holdPoints: ["Permit signoff", "Vac check"],
-      demobePlan: ["Clean site", "Packout"]
-    };
-  } else if (command.includes('predict')) {
-    response = {
-      type: "maintenance_report",
-      equipment: "JetTrailer-03",
-      overdue: "142 hours",
-      status: "Recommended for service"
-    };
-  } else if (command.includes('revise')) {
-    response = {
-      sop: "Confined Space Entry",
-      updatedBy: "AI",
-      status: "Draft revision logged"
+      mobePlan: ["Mobilize", "Safety Brief"],
+      holdPoints: ["Permit Review"],
+      demobePlan: ["Clean Site"]
     };
   } else {
     response = { message: "Unknown command." };
@@ -40,4 +27,4 @@ app.post('/api/chatbot', (req, res) => {
 });
 
 const port = process.env.PORT || 5000;
-app.listen(port, () => console.log(`✅ Backend running on port ${port}`));
+app.listen(port, () => console.log(`✅ Motivo backend running on port ${port}`));
